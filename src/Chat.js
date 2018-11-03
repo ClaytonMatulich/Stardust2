@@ -30,7 +30,7 @@ class Chat extends Component {
         this.setState({ currentUser })
         console.log('Bleep bloop 🤖 You are connected to Chatkit')
         return currentUser.subscribeToRoom({
-            roomId: 19374400, // Replace with YOUR ROOM ID
+            roomId: 19374859, // Replace with YOUR ROOM ID
             messageLimit: 100,
             hooks: {
                 onNewMessage: message => {
