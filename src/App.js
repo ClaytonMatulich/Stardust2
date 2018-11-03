@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import UsernameForm from './UsernameForm'
 import Chat from './Chat'
+import './UsernameForm.css'
 
 class App extends Component {
   state = {
