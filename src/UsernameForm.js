@@ -37,7 +37,7 @@ class UsernameForm extends Component {
               id="inputField"
               type = "text"
               label="Username:"
-              placeholder="     For example, @l337H4ck0r"
+              placeholder="     For example, @l337H4ck0rzz"
               value={this.state.username}
               onChange={this.handleChange}
             />
