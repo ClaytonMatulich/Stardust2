@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import UsernameForm from './UsernameForm'
 import Chat from './Chat'
 import './UsernameForm.css'
+import firebase from './firebase.js'
 
 class App extends Component {
   state = {
