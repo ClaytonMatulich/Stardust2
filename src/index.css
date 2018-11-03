@@ -1,0 +1,150 @@
+/* ./src/index.css */
+
+
+
+body {
+  font-family:  BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.username-form {
+  width: 100vw;
+  height: 100vh;
+  background: url(./images/landing.gif) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.username-form button {
+  margin-top: 10px;
+}
+
+#loginForm{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
+
+#titleWrapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+#title{
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 50px;
+}
+
+
+#inputFieldWrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 25px;
+}
+
+
+#inputField {
+  border-radius: 25px;
+  transition: 0.26 ease;
+  width: 225px;
+  height: 30px;
+  font-size: 11px;
+
+}
+
+#inputField:hover {
+  border-color: slateblue;
+}
+
+
+#submitButtonWrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+#submitButton {
+  width: 225px;
+  height: 30px;
+  border-radius: 25px;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  transition: 0.26s ease;
+  margin-bottom: 3%;
+  margin-top: 0%;
+  -webkit-transition: width 1s ease-in-out;
+  -moz-transition: width 1s ease-in-out;
+  -o-transition: width 1s ease-in-out;
+  transition: width 1s ease-in-out;
+  transition: ease 0.5s;
+  font-size: 13px;
+}
+
+#submitButton:hover {
+  background-color: white;
+  color: slateblue;
+}
+
+
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+
+}
+
+.online-list {
+  /* box-shadow: 0 -8px 20px 2px #DEDEE3; */
+  
+  background: rgb(204, 204, 204);
+}
+
+.chat {
+  /* background: #F4FAFE; */
+  
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: rgb(159, 159, 159);
+}
+
+
+.send-message-form{
+  padding: 10px 15px 10px 15px;
+  display: flex;
+}
+
+.send-message-form div {
+  flex: 1;
+  margin-right: 5px;
+}
+
+
+.online-list-item {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+li span {
+  padding-right: 5px;
+}
+
