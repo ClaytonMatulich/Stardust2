@@ -3,24 +3,52 @@
 import React, { Component } from 'react'
 import { TextInput } from 'react-desktop/macOs'
 import { Button } from 'react-desktop/macOs'
+import firebase from './firebase.js'
 
 
 
 class UsernameForm extends Component {
   constructor() {
+    firebase.database().ref();
     super()
     this.state = {
-      username: ''
+      email: '',
+      password: ''
     }
   }
 
   handleSubmit = e => {
-    e.preventDefault()
-    this.props.handleSubmit(this.state.username)
+    e.preventDefault();
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(function () {
+      alert("SUCCESS!!!");
+  }).catch(function (error) {
+      if (error != null) {
+          alert(error.message);
+          return;
+      }
+  });
+    
+    // if (this.state.password !== '' || this.state.password !== '' ) {
+    //   firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    //     var errorCode = error.code;
+    //     var errorMessage = error.message;
+    //     if (errorCode === 'auth/wrong-password') {
+    //       alert('Wrong password.');
+    //     } else {
+    //       alert(errorMessage);
+    //     }
+    //     // ...
+    //   });
+    // }
+    
   }
 
-  handleChange = e => {
-    this.setState({ username: e.target.value })
+  handleChangeEmail = e => {
+    this.setState({ email: e.target.value })
+  }
+
+  handleChangePassword = e => {
+    this.setState({ password: e.target.value })
   }
 
   render() {
@@ -38,12 +66,12 @@ class UsernameForm extends Component {
             </form>
           </div>
           <div id="login-container">
-            <form id="login-form">
+            <form onSubmit={this.handleSubmit} id="login-form">
               <div id="login-logo"></div>
               <label id="logo-name">S T A R D U S T</label>
-              <input class="login-fields" placeholder="Email"></input>
-              <input class="login-fields" placeholder="Password"></input>
-              <button id="login-button">Login</button>
+              <input class="login-fields" value={this.state.email} onChange={this.handleChangeEmail} placeholder="Email"></input>
+              <input type="password" class="login-fields" value={this.state.password} onChange={this.handleChangePassword} placeholder="Password"></input>
+              <button id="login-button" type="submit">Login</button>
             </form>
           </div>
         </div>

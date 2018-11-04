@@ -11,9 +11,4 @@ var config = {
 
 firebase.initializeApp(config);
 
-var starCountRef = firebase.database().ref('users/');
-starCountRef.set({
-    username: 'FUCK'
-});
-
 export default firebase;
