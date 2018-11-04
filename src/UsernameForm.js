@@ -25,33 +25,32 @@ class UsernameForm extends Component {
 
   render() {
     return (
-      <div className="username-form">
-        <form onSubmit={this.handleSubmit} id='loginForm'>
-
-          <div id='titleWrapper'>
-            <label id = "title" > Stardust </label>
+     
+      <div id="username-form">
+        <div id="register-login-card">
+          <div id="register-container">
+            <div id="welcome-description">
+              <label>Welcome</label>
+              <p>Stardust is an application that will
+                allow users to communicate with their friends
+                in a single chat room. In additio, Stardust will encourage 
+                users to encounter new people, make new friends, and create 
+                new additional chat rooms. Sign up now and instantly
+                enjoy all Stardust has to offer. Bye :) 
+              </p>
+              <div id="register-button">Register</div>
+            </div>
+            <div id="register-form"></div>
           </div>
-
-          <div id = "inputFieldWrapper">
-            <input 
-              id="inputField"
-              type = "text"
-              label="Username:"
-              placeholder="     For example, @l337H4ck0rzz"
-              value={this.state.username}
-              onChange={this.handleChange}
-            />
+          <div id="login-container">
+            <form id="login-form">
+              <div id="login-logo"></div>
+              <input class="login-fields" placeholder="Email"></input>
+              <input class="login-fields" placeholder="Password"></input>
+              <button id="login-button">Login</button>
+            </form>
           </div>
-          <div id = "submitButtonWrapper">
-            {/* <Button color="blue" type="submit">
-              Submit
-            </Button> */}
-
-            <input id="submitButton" type = "submit" >
-            
-            </input>
-          </div>
-        </form>
+        </div>
       </div>
     )
   }
