@@ -29,22 +29,18 @@ class UsernameForm extends Component {
       <div id="username-form">
         <div id="register-login-card">
           <div id="register-container">
-            <div id="welcome-description">
+            <form id="register-form">
               <label>Welcome</label>
-              <p>Stardust is an application that will
-                allow users to communicate with their friends
-                in a single chat room. In additio, Stardust will encourage 
-                users to encounter new people, make new friends, and create 
-                new additional chat rooms. Sign up now and instantly
-                enjoy all Stardust has to offer. Bye :) 
-              </p>
+              <input class="register-fields" placeholder="Username"></input>
+              <input class="register-fields" placeholder="Email"></input>
+              <input class="register-fields" placeholder="Password"></input>
               <div id="register-button">Register</div>
-            </div>
-            <div id="register-form"></div>
+            </form>
           </div>
           <div id="login-container">
             <form id="login-form">
               <div id="login-logo"></div>
+              <label id="logo-name">S T A R D U S T</label>
               <input class="login-fields" placeholder="Email"></input>
               <input class="login-fields" placeholder="Password"></input>
               <button id="login-button">Login</button>
@@ -52,6 +48,8 @@ class UsernameForm extends Component {
           </div>
         </div>
       </div>
+
+      
     )
   }
 }
