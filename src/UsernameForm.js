@@ -16,28 +16,21 @@ class UsernameForm extends Component {
 		};
 	}
 
-	handleSubmit = e => {
+	handleSubmit = (e) => {
 		e.preventDefault();
 		if (this.state.email !== '' || this.state.password !== '') {
 			fire
 				.auth()
 				.signInWithEmailAndPassword(this.state.email, this.state.password)
 				.then(() => {
-					// if (fireDatabase.)
 					var currentUser = fire.auth().currentUser;
 					var currentDate = new Date().toLocaleString();
-					fireDatabase
-						.child('users/' + currentUser.uid + '/')
-						.child('last_login')
-						.set(currentDate);
+					fireDatabase.child('users/' + currentUser.uid + '/').child('last_login').set(currentDate);
 
-					fireDatabase
-						.child('/users/' + currentUser.uid)
-						.once('value')
-						.then(snapshot => {
-							var username = snapshot.val().username;
-							this.props.handleSubmit(username);
-						});
+					fireDatabase.child('/users/' + currentUser.uid).once('value').then((snapshot) => {
+						var username = snapshot.val().username;
+						this.props.handleSubmit(username);
+					});
 				})
 				.catch(function(error) {
 					if (error != null) {
@@ -47,7 +40,7 @@ class UsernameForm extends Component {
 				});
 		}
 	};
-	handleRegister = e => {
+	handleRegister = (e) => {
 		e.preventDefault();
 		fire
 			.auth()
@@ -62,19 +55,6 @@ class UsernameForm extends Component {
 					username: currentUserUsername
 				});
 				this.props.handleSubmit(currentUserUsername);
-				// fireDatabase.child('usernames_used').hasChild( childPath )
-				if (
-					fireDatabase
-						.child('/users/pWFQpjuoxjdyU0Kmbl2uMIwzVDo2')
-						.once('value')
-						.then(snapshot => {
-							var username = snapshot.username;
-
-							return false;
-						})
-				)
-					throw 'EXISTS!';
-				// alert("Already Exists");
 			})
 			.catch(function(error) {
 				if (error != null) {
@@ -83,29 +63,29 @@ class UsernameForm extends Component {
 				}
 			});
 	};
-	handleChangeEmail = e => {
+	handleChangeEmail = (e) => {
 		this.setState({
 			email: e.target.value
 		});
 	};
 
-	handleChangePassword = e => {
+	handleChangePassword = (e) => {
 		this.setState({
 			password: e.target.value
 		});
 	};
-	handleRegEmail = e => {
+	handleRegEmail = (e) => {
 		this.setState({
 			registerEmail: e.target.value
 		});
 	};
 
-	handleRegPassword = e => {
+	handleRegPassword = (e) => {
 		this.setState({
 			registerPassword: e.target.value
 		});
 	};
-	handleChangeUsername = e => {
+	handleChangeUsername = (e) => {
 		this.setState({
 			username: e.target.value
 		});
@@ -134,6 +114,7 @@ class UsernameForm extends Component {
 								value={this.state.registerPassword}
 								onChange={this.handleRegPassword}
 								placeholder="Password"
+								type="password"
 							/>
 							<button id="register-button" type="submit">
 								Register {' '}
