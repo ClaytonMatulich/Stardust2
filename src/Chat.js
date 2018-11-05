@@ -6,7 +6,7 @@ import { ChatManager, TokenProvider } from '@pusher/chatkit'
 import MessageList from './MessageList'
 import SendMessageForm from './SendMessageForm'
 import OnlineList from './OnlineList'
-import './Chat.css'
+import './styling/Chat.css'
 
 class Chat extends Component {
   state = {
@@ -62,7 +62,7 @@ class Chat extends Component {
 
   render() {
     return (
-        <div className="wrapper">
+        <div className="chat-window-container">
             <div>
                 <OnlineList
                     currentUser={this.state.currentUser}

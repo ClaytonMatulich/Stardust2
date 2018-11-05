@@ -25,15 +25,18 @@ class SendMessageForm extends Component {
     return (
       <div className="send-message-form-container">
         <form onSubmit={this.onSubmit} className="send-message-form">
-          <TextInput
+          <input
+            id = "message-field"
             type="text"
             onChange={this.onChange}
             value={this.state.text}
             className="message-input"
-          />
-          <Button color="blue" type="submit">
+          ></input>
+          
+          
+          <button id = "send-message-button" color="blue" type="submit">
             Send
-          </Button>
+          </button>
         </form>
       </div>
     )
