@@ -6,6 +6,7 @@ import { ChatManager, TokenProvider } from '@pusher/chatkit'
 import MessageList from './MessageList'
 import SendMessageForm from './SendMessageForm'
 import OnlineList from './OnlineList'
+import './Chat.css'
 
 class Chat extends Component {
   state = {

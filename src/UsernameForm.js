@@ -3,30 +3,41 @@
 import React, { Component } from 'react'
 import { TextInput } from 'react-desktop/macOs'
 import { Button } from 'react-desktop/macOs'
-import firebase from './firebase.js'
+import fire from './firebase'
+import { checkServerIdentity } from 'tls';
+import { __await } from 'tslib';
 
 
 
 class UsernameForm extends Component {
   constructor() {
-    firebase.database().ref();
+    fire.database().ref();
     super()
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      username: 'clayton',
+      firebase: false
     }
   }
 
+  
+
   handleSubmit = e => {
+    var test = 3;
+
     e.preventDefault();
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(function () {
-      alert("SUCCESS!!!");
-  }).catch(function (error) {
-      if (error != null) {
-          alert(error.message);
-          return;
-      }
-  });
+    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(function () {
+      //alert("SUCCESS!!!");
+      //this.props.handleSubmit(this.state.username);
+      
+    }).catch(function (error) {
+        if (error != null) {
+            alert(error.message);
+            return;
+        }
+      });
+
     
     // if (this.state.password !== '' || this.state.password !== '' ) {
     //   firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
@@ -40,8 +51,9 @@ class UsernameForm extends Component {
     //     // ...
     //   });
     // }
-    
+
   }
+
 
   handleChangeEmail = e => {
     this.setState({ email: e.target.value })
