@@ -13,15 +13,14 @@ class UsernameForm extends Component {
 		super();
 		this.state = {
 			email: '',
+			registerEmail: '',
 			password: '',
-			username: 'clayton',
-			firebase: false
+			registerPassword: '',
+			username: ''
 		};
 	}
 
 	handleSubmit = (e) => {
-		var test = 3;
-
 		e.preventDefault();
 		fire
 			.auth()
@@ -36,21 +35,22 @@ class UsernameForm extends Component {
 					return;
 				}
 			});
-
-		// if (this.state.password !== '' || this.state.password !== '' ) {
-		//   firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-		//     var errorCode = error.code;
-		//     var errorMessage = error.message;
-		//     if (errorCode === 'auth/wrong-password') {
-		//       alert('Wrong password.');
-		//     } else {
-		//       alert(errorMessage);
-		//     }
-		//     // ...
-		//   });
-		// }
 	};
-
+	handleRegister = (e) => {
+		e.preventDefault();
+		fire
+			.auth()
+			.createUserWithEmailAndPassword(this.state.registerEmail, this.state.registerPassword)
+			.then(() => {
+				alert('SUCCESS!!!');
+			})
+			.catch(function(error) {
+				if (error != null) {
+					alert(error.message);
+					return;
+				}
+			});
+	};
 	handleChangeEmail = (e) => {
 		this.setState({ email: e.target.value });
 	};
@@ -58,18 +58,44 @@ class UsernameForm extends Component {
 	handleChangePassword = (e) => {
 		this.setState({ password: e.target.value });
 	};
+	handleRegEmail = (e) => {
+		this.setState({ registerEmail: e.target.value });
+	};
 
+	handleRegPassword = (e) => {
+		this.setState({ registerPassword: e.target.value });
+	};
+	handleChangeUsername = (e) => {
+		this.setState({ username: e.target.value });
+	};
 	render() {
 		return (
 			<div id="username-form">
 				<div id="register-login-card">
 					<div id="register-container">
-						<form id="register-form">
+						<form onSubmit={this.handleRegister} id="register-form">
 							<label>Welcome</label>
-							<input class="register-fields" placeholder="Username" />
-							<input class="register-fields" placeholder="Email" />
-							<input class="register-fields" placeholder="Password" />
-							<div id="register-button">Register</div>
+							<input
+								class="register-fields"
+								value={this.state.username}
+								onChange={this.handleChangeUsername}
+								placeholder="Username"
+							/>
+							<input
+								class="register-fields"
+								value={this.state.registerEmail}
+								onChange={this.handleRegEmail}
+								placeholder="Email"
+							/>
+							<input
+								class="register-fields"
+								value={this.state.registerPassword}
+								onChange={this.handleRegPassword}
+								placeholder="Password"
+							/>
+							<button id="register-button" type="submit">
+								Register
+							</button>
 						</form>
 					</div>
 					<div id="login-container">
