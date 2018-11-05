@@ -38,7 +38,7 @@ class OnlineList extends Component {
             background: status === 'online' ? '#6BD761' : 'gray'
           }}
         />
-        <Text color="#414141" size="13">
+        <Text color="#FFFFFF" size="13">
           {name}{' '}
         </Text>{' '}
       </ListViewRow>

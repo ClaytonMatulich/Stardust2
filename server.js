@@ -3,7 +3,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const Chatkit = require('pusher-chatkit-server')
+const Chatkit = require('@pusher/chatkit-server')
 
 const chatkit = new Chatkit.default({
   instanceLocator: 'v1:us1:ab96db41-822d-4a19-8625-36af07997e60',
