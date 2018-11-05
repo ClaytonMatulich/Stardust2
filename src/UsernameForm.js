@@ -1,48 +1,80 @@
 // ./src/UsernameForm.js
 
 import React, { Component } from 'react';
-import { TextInput } from 'react-desktop/macOs';
-import { Button } from 'react-desktop/macOs';
-import fire from './firebase';
-import { checkServerIdentity } from 'tls';
+import fire, { fireDatabase } from './firebase';
 import { __await } from 'tslib';
 
 class UsernameForm extends Component {
 	constructor() {
-		fire.database().ref();
 		super();
 		this.state = {
-			email: '',
+			username: '',
 			registerEmail: '',
-			password: '',
 			registerPassword: '',
-			username: ''
+			email: '',
+			password: ''
 		};
 	}
 
-	handleSubmit = (e) => {
+	handleSubmit = e => {
 		e.preventDefault();
-		fire
-			.auth()
-			.signInWithEmailAndPassword(this.state.email, this.state.password)
-			.then(() => {
-				//alert("SUCCESS!!!");
-				this.props.handleSubmit(this.state.username);
-			})
-			.catch(function(error) {
-				if (error != null) {
-					alert(error.message);
-					return;
-				}
-			});
+		if (this.state.email !== '' || this.state.password !== '') {
+			fire
+				.auth()
+				.signInWithEmailAndPassword(this.state.email, this.state.password)
+				.then(() => {
+					// if (fireDatabase.)
+					var currentUser = fire.auth().currentUser;
+					var currentDate = new Date().toLocaleString();
+					fireDatabase
+						.child('users/' + currentUser.uid + '/')
+						.child('last_login')
+						.set(currentDate);
+
+					fireDatabase
+						.child('/users/' + currentUser.uid)
+						.once('value')
+						.then(snapshot => {
+							var username = snapshot.val().username;
+							this.props.handleSubmit(username);
+						});
+				})
+				.catch(function(error) {
+					if (error != null) {
+						alert(error.message);
+						return;
+					}
+				});
+		}
 	};
-	handleRegister = (e) => {
+	handleRegister = e => {
 		e.preventDefault();
 		fire
 			.auth()
 			.createUserWithEmailAndPassword(this.state.registerEmail, this.state.registerPassword)
 			.then(() => {
-				alert('SUCCESS!!!');
+				var currentUser = fire.auth().currentUser;
+				var currentDate = new Date().toLocaleString();
+				var currentUserUsername = this.state.username;
+				fireDatabase.child('users/' + currentUser.uid).set({
+					last_login: currentDate,
+					email: currentUser.email,
+					username: currentUserUsername
+				});
+				this.props.handleSubmit(currentUserUsername);
+				// fireDatabase.child('usernames_used').hasChild( childPath )
+				if (
+					fireDatabase
+						.child('/users/pWFQpjuoxjdyU0Kmbl2uMIwzVDo2')
+						.once('value')
+						.then(snapshot => {
+							var username = snapshot.username;
+
+							return false;
+						})
+				)
+					throw 'EXISTS!';
+				// alert("Already Exists");
 			})
 			.catch(function(error) {
 				if (error != null) {
@@ -51,22 +83,32 @@ class UsernameForm extends Component {
 				}
 			});
 	};
-	handleChangeEmail = (e) => {
-		this.setState({ email: e.target.value });
+	handleChangeEmail = e => {
+		this.setState({
+			email: e.target.value
+		});
 	};
 
-	handleChangePassword = (e) => {
-		this.setState({ password: e.target.value });
+	handleChangePassword = e => {
+		this.setState({
+			password: e.target.value
+		});
 	};
-	handleRegEmail = (e) => {
-		this.setState({ registerEmail: e.target.value });
+	handleRegEmail = e => {
+		this.setState({
+			registerEmail: e.target.value
+		});
 	};
 
-	handleRegPassword = (e) => {
-		this.setState({ registerPassword: e.target.value });
+	handleRegPassword = e => {
+		this.setState({
+			registerPassword: e.target.value
+		});
 	};
-	handleChangeUsername = (e) => {
-		this.setState({ username: e.target.value });
+	handleChangeUsername = e => {
+		this.setState({
+			username: e.target.value
+		});
 	};
 	render() {
 		return (
@@ -74,7 +116,7 @@ class UsernameForm extends Component {
 				<div id="register-login-card">
 					<div id="register-container">
 						<form onSubmit={this.handleRegister} id="register-form">
-							<label>Welcome</label>
+							<label> Welcome </label> {' '}
 							<input
 								class="register-fields"
 								value={this.state.username}
@@ -94,14 +136,17 @@ class UsernameForm extends Component {
 								placeholder="Password"
 							/>
 							<button id="register-button" type="submit">
-								Register
-							</button>
-						</form>
-					</div>
+								Register {' '}
+							</button>{' '}
+							{' '}
+						</form>{' '}
+						{' '}
+					</div>{' '}
+					{' '}
 					<div id="login-container">
 						<form onSubmit={this.handleSubmit} id="login-form">
 							<div id="login-logo" />
-							<label id="logo-name">S T A R D U S T</label>
+							<label id="logo-name"> S T A R D U S T </label> {' '}
 							<input
 								class="login-fields"
 								value={this.state.email}
@@ -116,11 +161,15 @@ class UsernameForm extends Component {
 								placeholder="Password"
 							/>
 							<button id="login-button" type="submit">
-								Login
-							</button>
-						</form>
-					</div>
-				</div>
+								Login {' '}
+							</button>{' '}
+							{' '}
+						</form>{' '}
+						{' '}
+					</div>{' '}
+					{' '}
+				</div>{' '}
+				{' '}
 			</div>
 		);
 	}
