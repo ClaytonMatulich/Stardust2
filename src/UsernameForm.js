@@ -16,7 +16,7 @@ class UsernameForm extends Component {
 		};
 	}
 
-	handleSubmit = (e) => {
+	handleSubmit = e => {
 		e.preventDefault();
 		if (this.state.email !== '' || this.state.password !== '') {
 			fire
@@ -25,12 +25,18 @@ class UsernameForm extends Component {
 				.then(() => {
 					var currentUser = fire.auth().currentUser;
 					var currentDate = new Date().toLocaleString();
-					fireDatabase.child('users/' + currentUser.uid + '/').child('last_login').set(currentDate);
+					fireDatabase
+						.child('users/' + currentUser.uid + '/')
+						.child('last_login')
+						.set(currentDate);
 
-					fireDatabase.child('/users/' + currentUser.uid).once('value').then((snapshot) => {
-						var username = snapshot.val().username;
-						this.props.handleSubmit(username);
-					});
+					fireDatabase
+						.child('/users/' + currentUser.uid)
+						.once('value')
+						.then(snapshot => {
+							var username = snapshot.val().username;
+							this.props.handleSubmit(username);
+						});
 				})
 				.catch(function(error) {
 					if (error != null) {
@@ -40,7 +46,7 @@ class UsernameForm extends Component {
 				});
 		}
 	};
-	handleRegister = (e) => {
+	handleRegister = e => {
 		e.preventDefault();
 		fire
 			.auth()
@@ -63,29 +69,29 @@ class UsernameForm extends Component {
 				}
 			});
 	};
-	handleChangeEmail = (e) => {
+	handleChangeEmail = e => {
 		this.setState({
 			email: e.target.value
 		});
 	};
 
-	handleChangePassword = (e) => {
+	handleChangePassword = e => {
 		this.setState({
 			password: e.target.value
 		});
 	};
-	handleRegEmail = (e) => {
+	handleRegEmail = e => {
 		this.setState({
 			registerEmail: e.target.value
 		});
 	};
 
-	handleRegPassword = (e) => {
+	handleRegPassword = e => {
 		this.setState({
 			registerPassword: e.target.value
 		});
 	};
-	handleChangeUsername = (e) => {
+	handleChangeUsername = e => {
 		this.setState({
 			username: e.target.value
 		});

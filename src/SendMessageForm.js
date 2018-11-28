@@ -1,7 +1,6 @@
 // ./src/SendMessageForm.js
 
 import React, { Component } from 'react'
-import { Button, TextInput } from 'react-desktop/macOs'
 
 class SendMessageForm extends Component {
   state = {

@@ -26,16 +26,16 @@ class Chat extends Component {
 
 		chatkit
 			.connect()
-			.then((currentUser) => {
+			.then(currentUser => {
 				this.setState({ currentUser });
 				console.log('Bleep bloop 🤖 You are connected to Chatkit');
 				return currentUser.subscribeToRoom({
-					roomId: 19375338, // Replace with YOUR ROOM ID
+					roomId: 19387568, // Replace with YOUR ROOM ID
 					messageLimit: 100,
 					hooks: {
-						onNewMessage: (message) => {
+						onNewMessage: message => {
 							this.setState({
-								messages: [ ...this.state.messages, message ]
+								messages: [...this.state.messages, message]
 							});
 						},
 						onUserCameOnline: () => this.forceUpdate(),
@@ -44,13 +44,13 @@ class Chat extends Component {
 					}
 				});
 			})
-			.then((currentRoom) => {
+			.then(currentRoom => {
 				this.setState({ currentRoom });
 			})
-			.catch((error) => console.error('error', error));
+			.catch(error => console.error('error', error));
 	}
 
-	onSend = (text) => {
+	onSend = text => {
 		this.state.currentUser.sendMessage({
 			text,
 			roomId: this.state.currentRoom.id
